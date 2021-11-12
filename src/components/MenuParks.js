@@ -5,13 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 // import "./App.css";
 import { useEffect, useState } from "react";
 import initNetworkRequest from "../services/networkService";
-
+import Webcams from "./Webcams";
 // let activityId = function GetactivityId(a) {
 //   return a;
 // };
 
 function ParksMenu(props) {
-  console.log(props.activityId);
+  // console.log(props.activityId);
   const [selectedItemParks, setSelectedItemParks] = useState("__loading");
   const [parks, setParks] = useState([
     {
@@ -29,6 +29,7 @@ function ParksMenu(props) {
   useEffect(() => {
     initNetworkRequest({
       url: "https://developer.nps.gov/api/v1/activities/parks",
+      //https://developer.nps.gov/api/v1/activities/parks?id=09DF0950-D319-4557-A57E-04CD2F63FF42&api_key=6zauCetE8MKXVECJybtaKYiwerySXtQaa8630cI1
       queryParams: {
         activityId: props.activityId,
       },
@@ -60,6 +61,7 @@ function ParksMenu(props) {
           </MenuItem>
         ))}
       </Select>
+      <Webcams />
     </div>
   );
 }

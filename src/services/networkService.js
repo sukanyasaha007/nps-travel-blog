@@ -15,14 +15,14 @@ async function initNetworkRequest({
   };
 
   try {
-    const response = await fetch(url + '?' + qs.stringify(finalQueryParams), {
+    const response = await fetch(url + "?" + qs.stringify(finalQueryParams), {
       method,
       body:
         method === "GET" && typeof body === "object"
           ? undefined
           : JSON.stringify(body),
     });
-    // console.log(response.json);
+    console.log(response);
     return await response.json();
   } catch (err) {
     throw err;

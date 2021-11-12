@@ -20,7 +20,7 @@ function ActivitiesMenu() {
 
   const onChangeHandler = (e) => {
     setSelectedItem(e.target.value);
-    console.log("selectedItem", selectedItem);
+    // console.log("selectedItem", selectedItem);
     // GetactivityId(selectedItem);
   };
 
