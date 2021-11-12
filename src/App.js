@@ -10,8 +10,6 @@ import ActivitiesMenu from "./components/MenuActivities";
 // import ParksMenu from "./components/MenuParks";
 
 function App() {
-  let act = ActivitiesMenu();
-  console.log(act);
   return (
     <div>
       <ActivitiesMenu />

@@ -22,7 +22,6 @@ async function initNetworkRequest({
           ? undefined
           : JSON.stringify(body),
     });
-    console.log(response);
     return await response.json();
   } catch (err) {
     throw err;
