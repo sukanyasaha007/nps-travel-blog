@@ -13,15 +13,13 @@ function ParksMenu(props) {
   const [selectedItemParks, setSelectedItemParks] = useState("__loading");
   const [parks, setParks] = useState([
     {
-      id: "__loading",
-      name: "Loading activities...",
+      parkCode: "__loading",
+      fullName: "Loading parks...",
     },
   ]);
 
   const onChangeHandler = (e) => {
-    // console.log(response.data[0].parks[0].fullName);
     setSelectedItemParks(e.target.value);
-    // console.log("activityID", props.activityId, props);
   };
 
   useEffect(() => {
@@ -33,12 +31,12 @@ function ParksMenu(props) {
     })
       .then((response) => {
         setParks(response.data[0].parks);
-        setSelectedItemParks(response.data[0].parks[0].fullName);
+        setSelectedItemParks(response.data[0].parks[0].parkCode);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [props.activityId]);
 
   return (
     <div>
@@ -50,15 +48,14 @@ function ParksMenu(props) {
         onChange={onChangeHandler}
       >
         {parks.map((park) => (
-          <MenuItem value={park.id} key={park.id}>
-            {park.name}
+          <MenuItem value={park.parkCode} key={park.parkCode}>
+            {park.fullName}
           </MenuItem>
         ))}
       </Select>
       {selectedItemParks !== "__loading" && (
         <Webcams parkCode={selectedItemParks} />
       )}
-      
     </div>
   );
 }

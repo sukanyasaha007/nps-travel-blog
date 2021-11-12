@@ -22,7 +22,26 @@ function ParksData(props) {
     })
       .then((response) => {
         console.log(response.data[0].description);
-        setParkData(response.data[0].description);
+        setParkData(
+          response.data.reduce((newData, data) => {
+            console.log(data.activities.map((a) => a.name));
+            console.log(data.designation);
+            console.log(data.directionsInfo);
+            console.log(data.weatherInfo);
+            console.log(data.operatingHours.map((a) => a.standardHours)[0]);
+            console.log(data.topics.map((a) => a.name));
+
+            newData.push(
+              (data.activities.map((a) => a.name),
+              data.designation,
+              data.directionsInfo,
+              data.weatherInfo,
+              data.operatingHours.map((a) => a.standardHours)[0],
+              data.topics.map((a) => a.name))
+            );
+            return newData;
+          }, [])
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -33,9 +52,16 @@ function ParksData(props) {
     <div>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {parkData}
-          </Typography>
+          {parkData.map((data, idx) => (
+            <Typography
+              key={idx}
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {data}
+            </Typography>
+          ))}
         </CardContent>
       </Card>
     </div>
