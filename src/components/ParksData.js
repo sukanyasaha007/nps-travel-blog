@@ -38,6 +38,7 @@ function ParksData(props) {
     <div>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
+          <h1>Activities </h1>
           {parkData?.activities.map((val) => (
             <Typography
               key={val}
@@ -48,6 +49,74 @@ function ParksData(props) {
               {val}
             </Typography>
           ))}
+        </CardContent>
+        <CardContent>
+          <h1>Designation </h1>
+          <Typography
+            key="des"
+            sx={{ fontSize: 14 }}
+            color="text.secondary"
+            gutterBottom
+          >
+            {" "}
+            {parkData?.designation}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <h1>Weather Info </h1>
+          <Typography
+            key="weath"
+            sx={{ fontSize: 14 }}
+            color="text.secondary"
+            gutterBottom
+          >
+            {" "}
+            {parkData?.weatherInfo}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <h1>Topics </h1>
+          {parkData?.topics.map((val) => (
+            <Typography
+              key={val}
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {val}
+            </Typography>
+          ))}
+        </CardContent>
+        {/* //{friday: "All Day"
+monday: "All Day"
+saturday: "All Day"
+sunday: "All Day"
+thursday: "All Day"
+tuesday: "All Day"
+wednesday: "All Day"} */}
+
+        <CardContent>
+          <Typography
+            key={"wed"}
+            sx={{ fontSize: 14 }}
+            color="text.secondary"
+            gutterBottom
+          >
+            Sunday: {parkData?.operatingHours.sunday}
+            <br></br>
+            Monday: {parkData?.operatingHours.monday}
+            <br></br>
+            Tuesday: {parkData?.operatingHours.tuesday}
+            <br></br>
+            Wednesday: {parkData?.operatingHours.wednesday}
+            <br></br>
+            Thursday: {parkData?.operatingHours.thursday}
+            <br></br>
+            Friday: {parkData?.operatingHours.friday}
+            <br></br>
+            Saturday: {parkData?.operatingHours.saturday}
+            <br></br>
+          </Typography>
         </CardContent>
       </Card>
     </div>
