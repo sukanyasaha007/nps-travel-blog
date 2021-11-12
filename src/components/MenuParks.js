@@ -6,17 +6,15 @@ import MenuItem from "@mui/material/MenuItem";
 import { useEffect, useState } from "react";
 import initNetworkRequest from "../services/networkService";
 import Webcams from "./Webcams";
-// let activityId = function GetactivityId(a) {
-//   return a;
-// };
+import ParksData from "./ParksData";
 
 function ParksMenu(props) {
   // console.log(props.activityId);
   const [selectedItemParks, setSelectedItemParks] = useState("__loading");
   const [parks, setParks] = useState([
     {
-      parkCode: "__loading",
-      fullName: "Loading parks...",
+      id: "__loading",
+      name: "Loading activities...",
     },
   ]);
 
@@ -29,22 +27,18 @@ function ParksMenu(props) {
   useEffect(() => {
     initNetworkRequest({
       url: "https://developer.nps.gov/api/v1/activities/parks",
-      //https://developer.nps.gov/api/v1/activities/parks?id=09DF0950-D319-4557-A57E-04CD2F63FF42&api_key=6zauCetE8MKXVECJybtaKYiwerySXtQaa8630cI1
       queryParams: {
         activityId: props.activityId,
       },
-      //   activityID: activityID,
     })
       .then((response) => {
         setParks(response.data[0].parks);
-        setSelectedItemParks(response.data[0].parks[0].parkCode);
-
-        // console.log(parks);
+        setSelectedItemParks(response.data[0].parks[0].fullName);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [props.activityId]);
+  }, []);
 
   return (
     <div>
@@ -56,12 +50,15 @@ function ParksMenu(props) {
         onChange={onChangeHandler}
       >
         {parks.map((park) => (
-          <MenuItem value={park.parkCode} key={park.parkCode}>
-            {park.fullName}
+          <MenuItem value={park.id} key={park.id}>
+            {park.name}
           </MenuItem>
         ))}
       </Select>
-      <Webcams />
+      {selectedItemParks !== "__loading" && (
+        <Webcams parkCode={selectedItemParks} />
+      )}
+      
     </div>
   );
 }
