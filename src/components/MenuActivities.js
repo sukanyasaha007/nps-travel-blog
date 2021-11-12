@@ -5,6 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 // import "./App.css";
 import { useEffect, useState } from "react";
 import initNetworkRequest from "../services/networkService";
+// import ParksMenu from "./MenuParks";
+// import GetactivityId from "./MenuParks";
+import ParksMenu from "./MenuParks";
 
 function ActivitiesMenu() {
   const [selectedItem, setSelectedItem] = useState("__loading");
@@ -16,17 +19,21 @@ function ActivitiesMenu() {
   ]);
 
   const onChangeHandler = (e) => {
-    console.log(e.target.value);
     setSelectedItem(e.target.value);
+    console.log("selectedItem", selectedItem);
+    // GetactivityId(selectedItem);
   };
 
   useEffect(() => {
     initNetworkRequest({
-      url: "https://developer.nps.gov/api/v1/activities",
+      url: "https://developer.nps.gov/api/v1/activities?",
+      // activityID: "",
     })
       .then((response) => {
         setActivities(response.data);
         setSelectedItem(response.data[0].id);
+
+        // console.log(response.data[0].id);
       })
       .catch((err) => {
         console.log(err);
@@ -49,6 +56,7 @@ function ActivitiesMenu() {
           </MenuItem>
         ))}
       </Select>
+      <ParksMenu activityId={selectedItem} />
     </div>
   );
 }
