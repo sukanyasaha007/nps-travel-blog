@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 // import "./App.css";
 import { useEffect, useState } from "react";
 import initNetworkRequest from "../services/networkService";
-import ParksData from "./ParksData";
+// import ParksData from "./ParksData";
 
 function Webcams(props) {
   const [images, setImages] = useState([]);
@@ -47,7 +47,6 @@ function Webcams(props) {
             image={url}
             alt="webcam"
           />
-          <ParksData parkCode={props.parkCode} />
         </Card>
       ))}
     </div>

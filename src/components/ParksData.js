@@ -21,24 +21,25 @@ function ParksData(props) {
       },
     })
       .then((response) => {
-        console.log(response.data[0].description);
+        console.log(response.data);
         setParkData(
           response.data.reduce((newData, data) => {
-            console.log(data.activities.map((a) => a.name));
+            newData["activities"] = data.activities.map((a) => a.name);
+            newData["designation"] = data.designation;
+            newData["designation"] = data.designation;
+            newData["weatherInfo"] = data.weatherInfo;
+            newData["operatingHours"] = data.operatingHours.map(
+              (a) => a.standardHours
+            )[0];
+            newData["topics"] = data.topics.map((a) => a.name);
+
             console.log(data.designation);
             console.log(data.directionsInfo);
             console.log(data.weatherInfo);
             console.log(data.operatingHours.map((a) => a.standardHours)[0]);
             console.log(data.topics.map((a) => a.name));
 
-            newData.push(
-              (data.activities.map((a) => a.name),
-              data.designation,
-              data.directionsInfo,
-              data.weatherInfo,
-              data.operatingHours.map((a) => a.standardHours)[0],
-              data.topics.map((a) => a.name))
-            );
+            console.log(newData);
             return newData;
           }, [])
         );
@@ -52,16 +53,17 @@ function ParksData(props) {
     <div>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-          {parkData.map((data, idx) => (
+          {parkData.map((idx, val) => (
             <Typography
               key={idx}
               sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
             >
-              {data}
+              {parkData}
             </Typography>
           ))}
+          {/* { } */}
         </CardContent>
       </Card>
     </div>

@@ -54,6 +54,9 @@ function ParksMenu(props) {
         ))}
       </Select>
       {selectedItemParks !== "__loading" && (
+        <ParksData parkCode={selectedItemParks} />
+      )}
+      {selectedItemParks !== "__loading" && (
         <Webcams parkCode={selectedItemParks} />
       )}
     </div>
