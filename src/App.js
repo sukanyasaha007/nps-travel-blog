@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+// import Select from "@mui/material/Select";
+// import MenuItem from "@mui/material/MenuItem";
+
+// import { Component } from "react";
+import "./App.css";
+// import { useEffect, useState } from "react";
+// import initNetworkRequest from "./services/networkService";
+
+import ActivitiesMenu from "./components/MenuItem";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ActivitiesMenu />
     </div>
   );
 }

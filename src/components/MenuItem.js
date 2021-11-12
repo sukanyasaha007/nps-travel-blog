@@ -1,0 +1,56 @@
+import React from "react";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
+// import "./App.css";
+import { useEffect, useState } from "react";
+import initNetworkRequest from "../services/networkService";
+
+function ActivitiesMenu() {
+  const [selectedItem, setSelectedItem] = useState("__loading");
+  const [activities, setActivities] = useState([
+    {
+      id: "__loading",
+      name: "Loading activities...",
+    },
+  ]);
+
+  const onChangeHandler = (e) => {
+    console.log(e.target.value);
+    setSelectedItem(e.target.value);
+  };
+
+  useEffect(() => {
+    initNetworkRequest({
+      url: "https://developer.nps.gov/api/v1/activities",
+    })
+      .then((response) => {
+        setActivities(response.data);
+        setSelectedItem(response.data[0].id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // const MenuActivities = (selectedItem) =>{
+  return (
+    <div>
+      <Select
+        labelId="select-label"
+        id="simple-select"
+        value={selectedItem}
+        label="Activities"
+        onChange={onChangeHandler}
+      >
+        {activities.map((activity) => (
+          <MenuItem value={activity.id} key={activity.id}>
+            {activity.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </div>
+  );
+}
+
+export default ActivitiesMenu;
