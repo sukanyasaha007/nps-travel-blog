@@ -15,8 +15,8 @@ function ParksMenu(props) {
   const [selectedItemParks, setSelectedItemParks] = useState("__loading");
   const [parks, setParks] = useState([
     {
-      id: "__loading",
-      name: "Loading activities...",
+      parkCode: "__loading",
+      fullName: "Loading parks...",
     },
   ]);
 
@@ -28,24 +28,23 @@ function ParksMenu(props) {
 
   useEffect(() => {
     initNetworkRequest({
-      url:
-        "https://developer.nps.gov/api/v1/activities/parks?id=" +
-        props.activityId +
-        "&",
+      url: "https://developer.nps.gov/api/v1/activities/parks",
+      queryParams: {
+        activityId: props.activityId,
+      },
       //   activityID: activityID,
     })
       .then((response) => {
         setParks(response.data[0].parks);
-        setSelectedItemParks(response.data[0].parks[0].fullName);
+        setSelectedItemParks(response.data[0].parks[0].parkCode);
 
         // console.log(parks);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [props.activityId]);
 
-  // const MenuActivities = (selectedItem) =>{
   return (
     <div>
       <Select
@@ -56,8 +55,8 @@ function ParksMenu(props) {
         onChange={onChangeHandler}
       >
         {parks.map((park) => (
-          <MenuItem value={park.id} key={park.id}>
-            {park.name}
+          <MenuItem value={park.parkCode} key={park.parkCode}>
+            {park.fullName}
           </MenuItem>
         ))}
       </Select>

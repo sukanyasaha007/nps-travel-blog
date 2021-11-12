@@ -26,8 +26,7 @@ function ActivitiesMenu() {
 
   useEffect(() => {
     initNetworkRequest({
-      url: "https://developer.nps.gov/api/v1/activities?",
-      // activityID: "",
+      url: "https://developer.nps.gov/api/v1/activities",
     })
       .then((response) => {
         setActivities(response.data);
@@ -56,7 +55,7 @@ function ActivitiesMenu() {
           </MenuItem>
         ))}
       </Select>
-      <ParksMenu activityId={selectedItem} />
+      {selectedItem !== "__loading" && <ParksMenu activityId={selectedItem} />}
     </div>
   );
 }

@@ -15,7 +15,7 @@ async function initNetworkRequest({
   };
 
   try {
-    const response = await fetch(url + qs.stringify(finalQueryParams), {
+    const response = await fetch(url + '?' + qs.stringify(finalQueryParams), {
       method,
       body:
         method === "GET" && typeof body === "object"
