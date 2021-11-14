@@ -47,9 +47,9 @@ function Intro() {
       <Box className={classes.hero}>
         <Box>Welcome to Virtual National Park</Box>
       </Box>
-      <Box my={4} className={classes.paginationContainer}>
+      {/* <Box my={4} className={classes.paginationContainer}>
         <Pagination count={10} />
-      </Box>
+      </Box> */}
     </div>
   );
 }

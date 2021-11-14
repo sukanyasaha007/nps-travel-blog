@@ -2,6 +2,7 @@ import React from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
+import Box from "@material-ui/core/Box";
 // import "./App.css";
 import { useEffect, useState } from "react";
 import initNetworkRequest from "../services/networkService";
@@ -42,20 +43,24 @@ function ActivitiesMenu() {
   // const MenuActivities = (selectedItem) =>{
   return (
     <div>
-      <Select
-        labelId="select-label"
-        id="simple-select"
-        value={selectedItem}
-        label="Activities"
-        onChange={onChangeHandler}
-      >
-        {activities.map((activity) => (
-          <MenuItem value={activity.id} key={activity.id}>
-            {activity.name}
-          </MenuItem>
-        ))}
-      </Select>
-      {selectedItem !== "__loading" && <ParksMenu activityId={selectedItem} />}
+      <Box sx={{ position: "relative" }}>
+        <Select
+          labelId="select-label"
+          id="simple-select"
+          value={selectedItem}
+          label="Activities"
+          onChange={onChangeHandler}
+        >
+          {activities.map((activity) => (
+            <MenuItem value={activity.id} key={activity.id}>
+              {activity.name}
+            </MenuItem>
+          ))}
+        </Select>
+        {selectedItem !== "__loading" && (
+          <ParksMenu activityId={selectedItem} />
+        )}
+      </Box>
     </div>
   );
 }
