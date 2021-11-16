@@ -10,7 +10,30 @@ import initNetworkRequest from "../services/networkService";
 import Webcams from "./Webcams";
 import ParksData from "./ParksData";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  webcamsStyles: {
+    position: "absolute",
+    top: 28,
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    border: "1px solid",
+    p: 1,
+    bgcolor: "background.paper",
+  },
+  blogTitle: {
+    fontWeight: 80,
+    paddingBottom: theme.spacing(3),
+    color: "#000",
+    // position: "center",
+    fontSize: "40px",
+  },
+}));
+
 function ParksMenu(props) {
+  const classes = useStyles();
   // for the toggle
   const [open, setOpen] = React.useState(false);
 
@@ -21,7 +44,6 @@ function ParksMenu(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
-
   const styles = {
     position: "absolute",
     top: 28,
@@ -64,6 +86,9 @@ function ParksMenu(props) {
 
   return (
     <div>
+      <p>For each activity you can now select parks-</p>
+      <h1 className={classes.blogTitle}>Now Choose a Park</h1>
+
       <ClickAwayListener
         mouseEvent="onMouseDown"
         touchEvent="onTouchStart"
@@ -91,8 +116,8 @@ function ParksMenu(props) {
               </Select>
               {selectedItemParks !== "__loading" && (
                 <>
-                  <ParksData parkCode={selectedItemParks} />
                   <Webcams parkCode={selectedItemParks} />
+                  <ParksData parkCode={selectedItemParks} />
                 </>
               )}
             </Box>
