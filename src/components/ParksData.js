@@ -103,101 +103,119 @@ function ParksData(props) {
 
   return (
     <div>
-      <ClickAwayListener
-        mouseEvent="onMouseDown"
-        touchEvent="onTouchStart"
-        onClickAway={handleClickAway}
-      >
-        <Box sx={{ position: "relative" }}>
-          <button type="button" onClick={handleClick}>
-            Click to see park detils
-          </button>
-          {open ? (
-            <Box sx={classes.parkStyles}>
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                  <CardMedia className={classes.blogsContainer}></CardMedia>
-                  <Container maxWidth="lg">
-                    <h1 className={classes.blogTitle}>Activities </h1>
-                    <Container maxWidth="lg">
-                      <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
+      <Card>
+        <CardContent>
+          <h1 className={classes.blogTitle}>
+            Here is more information about the Park
+          </h1>
+          <p>
+            The National Park Service is one of the United States' leading
+            agencies for history and culture. In addition to preserving
+            important historic sites within national park boundaries, the
+            National Park Service works beyond those boundaries to ensure that
+            everyone's history is saved. Whether you want to visit an iconic
+            historical park, discover American stories, or find assistance to
+            preserve the places that matter to you, we hope you discover
+            something new about history during your visit.
+          </p>
+          <h3>Click to know more about the park</h3>
+          <ClickAwayListener
+            mouseEvent="onMouseDown"
+            touchEvent="onTouchStart"
+            onClickAway={handleClickAway}
+          >
+            <Box sx={{ position: "relative" }}>
+              <button type="button" onClick={handleClick}>
+                Click to see park detils
+              </button>
+              {open ? (
+                <Box sx={classes.parkStyles}>
+                  <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                      <CardMedia className={classes.blogsContainer}></CardMedia>
+                      <Container maxWidth="lg">
+                        <h1 className={classes.blogTitle}>Activities </h1>
+                        <Container maxWidth="lg">
+                          <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            spacing={{ xs: 1, sm: 2, md: 4 }}
+                          >
+                            {parkData?.activities.map((val) => (
+                              <Item key={val}>{val}</Item>
+                            ))}
+                          </Stack>
+                        </Container>
+                      </Container>
+                    </CardContent>
+                    <CardContent>
+                      <Container maxWidth="lg">
+                        <h1 className={classes.blogTitle}>Designation</h1>
+                        <Typography
+                          className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8"
+                          key="des"
+                          sx={{ fontSize: 14 }}
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          {parkData?.designation}
+                        </Typography>
+                      </Container>
+                    </CardContent>
+                    <CardContent>
+                      <h1 className={classes.blogTitle}>Weather Info </h1>
+                      <Typography
+                        key="weath"
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom
                       >
-                        {parkData?.activities.map((val) => (
-                          <Item key={val}>{val}</Item>
-                        ))}
-                      </Stack>
-                    </Container>
-                  </Container>
-                </CardContent>
-                <CardContent>
-                  <Container maxWidth="lg">
-                    <h1>Designation</h1>
-                    <Typography
-                      className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8"
-                      key="des"
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      {parkData?.designation}
-                    </Typography>
-                  </Container>
-                </CardContent>
-                <CardContent>
-                  <h1>Weather Info </h1>
-                  <Typography
-                    key="weath"
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {" "}
-                    {parkData?.weatherInfo}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <h1>Topics </h1>
-                  <Container maxWidth="lg">
-                    <Stack
-                      direction={{ xs: "column", sm: "row" }}
-                      spacing={{ xs: 1, sm: 2, md: 4 }}
-                    >
-                      {parkData?.topics.map((val) => (
-                        <Item key={val}>{val}</Item>
-                      ))}
-                    </Stack>
-                  </Container>
-                </CardContent>
-                <CardContent>
-                  <Typography
-                    key={"wed"}
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Sunday: {parkData?.operatingHours.sunday}
-                    <br></br>
-                    Monday: {parkData?.operatingHours.monday}
-                    <br></br>
-                    Tuesday: {parkData?.operatingHours.tuesday}
-                    <br></br>
-                    Wednesday: {parkData?.operatingHours.wednesday}
-                    <br></br>
-                    Thursday: {parkData?.operatingHours.thursday}
-                    <br></br>
-                    Friday: {parkData?.operatingHours.friday}
-                    <br></br>
-                    Saturday: {parkData?.operatingHours.saturday}
-                    <br></br>
-                  </Typography>
-                </CardContent>
-              </Card>
+                        {" "}
+                        {parkData?.weatherInfo}
+                      </Typography>
+                    </CardContent>
+                    <CardContent>
+                      <h1 className={classes.blogTitle}>Topics </h1>
+                      <Container maxWidth="lg">
+                        <Stack
+                          direction={{ xs: "column", sm: "row" }}
+                          spacing={{ xs: 1, sm: 2, md: 4 }}
+                        >
+                          {parkData?.topics.map((val) => (
+                            <Item key={val}>{val}</Item>
+                          ))}
+                        </Stack>
+                      </Container>
+                    </CardContent>
+                    <CardContent>
+                      <Typography
+                        key={"wed"}
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Sunday: {parkData?.operatingHours.sunday}
+                        <br></br>
+                        Monday: {parkData?.operatingHours.monday}
+                        <br></br>
+                        Tuesday: {parkData?.operatingHours.tuesday}
+                        <br></br>
+                        Wednesday: {parkData?.operatingHours.wednesday}
+                        <br></br>
+                        Thursday: {parkData?.operatingHours.thursday}
+                        <br></br>
+                        Friday: {parkData?.operatingHours.friday}
+                        <br></br>
+                        Saturday: {parkData?.operatingHours.saturday}
+                        <br></br>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ) : null}
             </Box>
-          ) : null}
-        </Box>
-      </ClickAwayListener>
+          </ClickAwayListener>
+        </CardContent>
+      </Card>
     </div>
   );
 }
